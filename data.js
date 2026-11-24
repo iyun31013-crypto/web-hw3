@@ -95,7 +95,7 @@ const movies = [
     },
     {
         title: "실낙원", year: 2026, date: "2026-10-21", rating: 8.0,
-        audience: 112193, poster: "wkm9BQLok7U2KihcCspCa663Qse.jpg", type: "boxoffice", rank: 3
+        audience: 112193, poster: "/wkm9BQLok7U2KihcCspCa663Qse.jpg", type: "boxoffice", rank: 3
     },
     {
         title: "타짜: 벨제붑의 노래", year: 2026, date: "2026-09-23", rating: 7.0,
