@@ -1,0 +1,36 @@
+name: 배포
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+  pages: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: keys.js 만들기(Secrets의 KEYS_JS)
+        env:
+          KEYS_JS: ${{ secrets.KEYS_JS }}
+        run: |
+          if [ -n "$KEYS_JS" ]; then
+            printf '%s\n' "$KEYS_JS" > keys.js
+          else
+            echo 'const KEYS = {};' > keys.js
+          fi
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path:
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy-to-pages.outputs.page_url }}
+    steps:
+     - id: deployment
+    uses: actions/deploy-pages@v4
